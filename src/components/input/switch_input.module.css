@@ -1,0 +1,87 @@
+@value blackColor: #000000;
+@value whiteColor: #ffffff;
+@value yellowColor: #f4b728;
+@value transparentColor: transparent;
+@value offWhiteColor: #aaaaaa;
+@value thumbDiameter: 16px;
+@value thumbDistance: 16px;
+@value switchPadding: 1px;
+@value colorDuration: 75ms;
+@value animationDuration: 300ms;
+
+.baseLabel {
+  position: relative;
+  display: inline-block;
+  align-items: center;
+  justify-content: left;
+  border-radius: 9999px;
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer;
+  padding: switchPadding;
+  padding-right: calc(thumbDistance + switchPadding);
+  width: thumbDiameter;
+  transition:
+    background colorDuration ease-in calc(animationDuration - colorDuration),
+    border colorDuration ease-in calc(animationDuration - colorDuration);
+}
+
+.baseLabel::after {
+  content: '';
+  display: block;
+  width: thumbDiameter;
+  height: thumbDiameter;
+  border-radius: 100%;
+  transition:
+    transform animationDuration linear 0s,
+    background colorDuration ease-in calc(animationDuration - colorDuration);
+}
+
+.daylightUnselectedLabel {
+  composes: baseLabel;
+  background: none;
+  border-color: blackColor;
+}
+
+.daylightUnselectedLabel::after {
+  background-color: blackColor;
+  transform: translateX(0);
+}
+
+.daylightSelectedLabel {
+  composes: baseLabel;
+  background-color: yellowColor;
+  border-color: yellowColor;
+}
+
+.daylightSelectedLabel::after {
+  background-color: whiteColor;
+  transform: translateX(thumbDistance);
+}
+
+.midnightUnselectedLabel {
+  composes: baseLabel;
+  background: none;
+  border-color: offWhiteColor;
+}
+
+.midnightUnselectedLabel::after {
+  background-color: offWhiteColor;
+  transform: translateX(0);
+}
+
+.midnightSelectedLabel {
+  composes: baseLabel;
+  background-color: yellowColor;
+  border-color: yellowColor;
+}
+
+.midnightSelectedLabel::after {
+  background-color: whiteColor;
+  transform: translateX(thumbDistance);
+}
+
+.checkbox {
+  visibility: hidden;
+  position: absolute;
+}
