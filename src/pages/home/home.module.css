@@ -1,0 +1,154 @@
+@value fontBlackColor, whiteColor, borderWhiteColor from '../../assets/colors.css';
+@value borderMidnightColor, grayishBlackColor, zcashYellowColor from '../../assets/colors.css';
+
+h2 {
+  margin: 5px 0 5px 0;
+}
+
+.themeContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+}
+
+.baseHeader {
+  font-size: 26px;
+  text-align: center;
+}
+
+.countdownInfoContainer {
+ border: 1px solid rebeccapurple;
+ display: flex;
+ flex-direction: column;
+}
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.logoContainer {
+  padding: 16px 40px;
+  display: flex;
+  background-color: grayishBlackColor;
+  justify-content: center;
+}
+
+.baseImg {
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.countdownContainer {
+  display: flex;
+  font-weight: 600;
+  background-color: zcashYellowColor;
+  justify-content: space-around;
+  align-items: center;
+  padding: 16px 0;
+  font-weight: 700;
+  flex-grow: 1;
+}
+
+.number {
+  font-size: 56px;
+}
+
+.timeLabel {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.timerColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timerColumn:not(:last-child) {
+  /* margin-right: 48px; */
+}
+
+.figureLogo {
+  composes: baseImg;
+  background-image: url('../../assets/img/zcash_logo.png');
+}
+
+.infoBlocksContainer {
+  margin-top: 20px;
+}
+
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  align-items: center;
+  flex: 1 0;
+  border-radius: 6px;
+}
+
+.infoBlock:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+.data {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.label {
+  font-size: 18px;
+}
+
+.daylightTimerContainer {
+  box-shadow: 0 5px 9px rgba(0,0,0,.08), 0 5px 9px rgba(0,0,0,0.4);
+  border-radius: 6px;
+  color: whiteColor;
+}
+
+.midnightTimerContainer {
+
+}
+
+.daylightHeader {
+  composes: baseHeader;
+  color: fontBlackColor;
+  border-bottom: 1px borderWhiteColor solid;
+}
+
+.midnightHeader {
+  composes: baseHeader;
+  color: whiteColor;
+  border-bottom: 1px borderMidnightColor solid;
+}
+
+.daylightInfoBlock {
+  composes: infoBlock;
+  box-shadow: 0 5px 9px rgba(0,0,0,.08), 0 5px 9px rgba(0,0,0,0.4);
+}
+
+.midnightInfoBlock {
+  composes: infoBlock;
+  color: whiteColor;
+  background-color: grayishBlackColor;
+}
+
+@media only screen and (min-width: 700px) {
+  .timer {
+    flex-direction: row;
+  }
+  .infoBlocksContainer {
+    display: flex;
+  }
+  .infoBlock:not(:last-child) {
+    margin-bottom: 0;
+    margin-right: 24px;
+  }
+}

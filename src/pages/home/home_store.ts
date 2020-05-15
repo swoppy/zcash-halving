@@ -13,6 +13,5 @@ export class HomeStore {
         GlobalThemeStore.set(this.theme.value ? Theme.MIDNIGHT : Theme.DAYLIGHT);
       },
     );
-    console.log(this.theme.value, GlobalThemeStore.get());
   }
 }
