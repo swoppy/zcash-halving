@@ -1,11 +1,11 @@
 @value blackColor from '../../../assets/colors.css';
-@value grayishWhiteColor from '../../../assets/colors.css';
+@value whiteColor from '../../../assets/colors.css';
 
 .baseBackground {
   box-sizing: border-box;
   min-height: 100%;
   min-width: 100%;
-  padding: 0 20px;
+  /* padding: 0 20px; */
   font-family: sans-serif;
   user-select: none;
 }
@@ -13,7 +13,7 @@
 .daylightBackground {
   composes: baseBackground;
   color: blackColor;
-  background: grayishWhiteColor;
+  background: whiteColor;
 }
 
 .midnightBackground {
@@ -23,5 +23,5 @@
 
 .container {
   margin: 0 auto;
-  max-width: 880px;
+  /* max-width: 880px; */
 }

@@ -8,11 +8,13 @@ import { observer } from 'mobx-react';
 import baseStyles from './home.module.css';
 import text from './home_text';
 import data from './formula';
-import { Renderer, InfoBlocks } from './components/components';
+import { Renderer, InfoBlocks, Faq, Stats } from './components/components';
 
 type HomeStyleProps = {
+  headerContainer: string;
   themeContainer: string;
-  header: string;
+  title: string;
+  halvingInfo: string;
   countdownContainer: string;
   timerContainer: string;
   timer: string;
@@ -21,12 +23,24 @@ type HomeStyleProps = {
   data: string;
   label: string;
   countdownInfoContainer: string;
+  faqContainer: string;
+  alphaSection: string;
+  question: string;
+  answer: string;
+  statsContainer: string;
+  wsWrapper: string;
+  widgetContainer: string;
+  statSheet: string;
+  sheetRow: string;
+  statLabel: string;
+  statData: string;
 };
 
 export const themedStyles: ThemedStyles<HomeStyleProps> = {
   [Theme.DAYLIGHT]: {
+    headerContainer: baseStyles.baseHeaderContainer,
     themeContainer: baseStyles.themeContainer,
-    header: baseStyles.daylightHeader,
+    title: baseStyles.daylightTitle,
     timerContainer: baseStyles.daylightTimerContainer,
     countdownContainer: baseStyles.countdownContainer,
     timer: baseStyles.timer,
@@ -35,10 +49,23 @@ export const themedStyles: ThemedStyles<HomeStyleProps> = {
     data: baseStyles.data,
     label: baseStyles.label,
     countdownInfoContainer: baseStyles.countdownInfoContainer,
+    faqContainer: baseStyles.daylightFaqContainer,
+    halvingInfo: baseStyles.daylightHalvingInfo,
+    alphaSection: baseStyles.alphaSection,
+    question: baseStyles.daylightQuestion,
+    answer: baseStyles.daylightAnswer,
+    statsContainer: baseStyles.daylightStatsContainer,
+    wsWrapper: baseStyles.wsWrapper,
+    widgetContainer: baseStyles.daylightWidgetContainer,
+    statSheet: baseStyles.statSheet,
+    sheetRow: baseStyles.daylightSheetRow,
+    statLabel: baseStyles.daylightStatLabel,
+    statData: baseStyles.daylightStatData,
   },
   [Theme.MIDNIGHT]: {
+    headerContainer: baseStyles.midnightHeaderContainer,
     themeContainer: baseStyles.themeContainer,
-    header: baseStyles.midnightHeader,
+    title: baseStyles.midnightTitle,
     timerContainer: baseStyles.midnightTimerContainer,
     countdownContainer: baseStyles.countdownContainer,
     timer: baseStyles.timer,
@@ -47,15 +74,24 @@ export const themedStyles: ThemedStyles<HomeStyleProps> = {
     data: baseStyles.data,
     label: baseStyles.label,
     countdownInfoContainer: baseStyles.countdownInfoContainer,
+    faqContainer: baseStyles.midnightFaqContainer,
+    halvingInfo: baseStyles.midnightHalvingInfo,
+    alphaSection: baseStyles.alphaSection,
+    question: baseStyles.midnightQestion,
+    answer: baseStyles.midnightAnswer,
+    statsContainer: baseStyles.midnightStatsContainer,
+    wsWrapper: baseStyles.wsWrapper,
+    widgetContainer: baseStyles.widgetContainer,
+    statSheet: baseStyles.statSheet,
+    sheetRow: baseStyles.midnightSheetRow,
+    statLabel: baseStyles.midnightStatLabel,
+    statData: baseStyles.midnightStatData,
   },
 };
 
-const Faq = () => {
-  return (
-    <div>
-
-    </div>
-  )
+const trimToNumber = (n: any) => {
+  const num = Number(n);
+  return num.toFixed(2);
 }
 
 type BaseHomeProps = {
@@ -67,46 +103,58 @@ type BaseHomeProps = {
 */
 const BaseHome = observer(({ store }: BaseHomeProps) => {
   const styles = useStyles(themedStyles);
-  const [state, setState] = React.useState({
+  const [halvingInfo, setHalvingInfo] = React.useState({
     currentBlock: 830818,
     blockTime: 75,
+    hashrate: 0,
+  });
+  const [economicInfo, setEconomicInfo] = React.useState({
+    price: 0,
+    totalSupply: 0,
+    circulatingSupply: 0,
+    marketCap: 0,
   });
 
-  const [price, setPrice] = React.useState(0);
-
   React.useEffect(() => {
-    fetch('https://api.zcha.in/v2/mainnet/network')
-      .then(response => response.json())
-      .then(data => setState({
-        currentBlock: data.blockNumber,
-        blockTime: data.meanBlockTime,
-      }))
+    // fetch('https://api.zcha.in/v2/mainnet/network')
+    //   .then(response => response.json())
+    //   .then(data => setHalvingInfo({
+    //     currentBlock: data.blockNumber,
+    //     blockTime: data.meanBlockTime,
+    //     hashrate: data.hashrate,
+    //   }))
 
-      fetch('https://api.coingecko.com/api/v3/simple/price?ids=zcash&vs_currencies=usd')
-        .then(response => response.json())
-        .then(data => setPrice(data.zcash.usd))
+      // fetch('https://api.coincap.io/v2/assets/zcash')
+      //   .then(response => response.json())
+      //   .then(data => setEconomicInfo(data.data.priceUsd))
 
-  }, [state.currentBlock, state.blockTime, Countdown, price]);
+  }, [halvingInfo, economicInfo]);
 
-  console.log(Math.trunc(state.blockTime * (data.halvingBlock() - state.currentBlock)));
-  const date = Date.now() + Math.trunc(state.blockTime * (data.halvingBlock() - state.currentBlock)) * 1000;
+  // console.log(Math.trunc(state.blockTime * (data.halvingBlock() - state.currentBlock)));
+  const date = Date.now() + Math.trunc(halvingInfo.blockTime * (data.halvingBlock() - halvingInfo.currentBlock)) * 1000;
   const placeholder = Date.now() + 500000000;
   return (
     <StandardPage>
-      <div className={styles.themeContainer}>
-        <SwitchInput store={store.theme}/>
+      <div className={styles.headerContainer}>
+        <div className={styles.themeContainer}>
+          <SwitchInput store={store.theme}/>
+        </div>
+        <div className={styles.title}>
+          <h2>{text.headerTitle()}</h2>
+        </div>
       </div>
-      <div className={styles.header}>
-        <h2>{text.headerTitle()}</h2>
+      <div className={styles.halvingInfo}>
+        <div className={styles.timerContainer}>
+          <Countdown date={date} renderer={Renderer}/>
+        </div>
+        <InfoBlocks
+          currentBlock={halvingInfo.currentBlock}
+          meanBlockTime={halvingInfo.blockTime}
+          hashrate={halvingInfo.hashrate}
+        />
       </div>
-      <div className={styles.timerContainer}>
-        <Countdown date={date} renderer={Renderer}/>
-      </div>
-      <InfoBlocks
-        currentBlock={state.currentBlock}
-        meanBlockTime={state.blockTime}
-        price={price}
-      />
+      <Faq/>
+      <Stats/>
     </StandardPage>
   );
 });

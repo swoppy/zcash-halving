@@ -1,8 +1,16 @@
 @value fontBlackColor, whiteColor, borderWhiteColor from '../../assets/colors.css';
 @value borderMidnightColor, grayishBlackColor, zcashYellowColor from '../../assets/colors.css';
+@value grayishWhiteColor, darkWhiteColor, lightBlackColor from '../../assets/colors.css';
+@value widgetColor, blackColor from '../../assets/colors.css';
+@value maxWidth: 880px;
 
 h2 {
-  margin: 5px 0 5px 0;
+  margin: 0;
+  padding: 5px 0 5px 0;
+}
+
+.baseHeaderContainer {
+  padding: 0 20px;
 }
 
 .themeContainer {
@@ -11,13 +19,18 @@ h2 {
   padding-top: 10px;
 }
 
-.baseHeader {
+.baseTitle {
   font-size: 26px;
   text-align: center;
+  max-width: maxWidth;
+  margin: 0 auto;
+}
+
+.baseHalvingInfo {
+  padding: 20px 20px;
 }
 
 .countdownInfoContainer {
- border: 1px solid rebeccapurple;
  display: flex;
  flex-direction: column;
 }
@@ -25,7 +38,6 @@ h2 {
 .timer {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
   border-radius: 6px;
   overflow: hidden;
 }
@@ -57,6 +69,11 @@ h2 {
   flex-grow: 1;
 }
 
+.baseTimeContainer {
+  margin: 0 auto;
+  max-width: maxWidth;
+}
+
 .number {
   font-size: 56px;
 }
@@ -72,23 +89,20 @@ h2 {
   align-items: center;
 }
 
-.timerColumn:not(:last-child) {
-  /* margin-right: 48px; */
-}
-
 .figureLogo {
   composes: baseImg;
   background-image: url('../../assets/img/zcash_logo.png');
 }
 
 .infoBlocksContainer {
-  margin-top: 20px;
+  max-width: maxWidth;
+  margin: 20px auto 0 auto;
 }
 
 .infoBlock {
   display: flex;
   flex-direction: column;
-  padding: 12px;
+  padding: 16px;
   align-items: center;
   flex: 1 0;
   border-radius: 6px;
@@ -103,41 +117,189 @@ h2 {
   font-weight: 600;
 }
 
+.statData {
+  font-size: 18px;
+  font-weight: 600;
+}
+
 .label {
   font-size: 18px;
 }
 
+.statLabel {
+  font-size: 16px;
+}
+
+.faqContainer {
+  display: flex;
+  padding: 20px 20px;
+}
+
+.alphaSection {
+  /* border: 1px solid red; */
+  max-width: maxWidth;
+  margin: 0 auto;
+}
+
+.baseQuestion {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.baseAnswer {
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.statsContainer {
+  padding: 20px 20px;
+}
+
+.wsWrapper {
+  max-width: maxWidth;
+  margin: 0 auto;
+  height: 360px;
+}
+
+.widgetContainer {
+  margin-bottom: 24px;
+  height: 100%
+}
+
+.statSheet {
+  flex: 1 0;
+}
+
+.sheetRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  padding: 10px 10px;
+}
+
+.daylightSheetRow:nth-child(odd) {
+  background-color: whiteColor;
+}
+
+.midnightSheetRow:nth-child(odd) {
+  background-color: lightBlackColor;
+}
+
+.daylightStatData {
+  composes: statData;
+  color: blackColor;
+}
+
+.daylightStatLabel {
+ composes: statLabel;
+ color: blackColor;
+}
+
+.midnightStatLabel {
+  composes: statLabel;
+  color: darkWhiteColor;
+}
+
+.midnightStatData {
+  composes: statData;
+  color: darkWhiteColor;
+}
+
+.daylightStatsContainer {
+  composes: statsContainer;
+  background-color: grayishWhiteColor;
+}
+
+.midnightStatsContainer {
+  composes: statsContainer;
+  background-color: blackColor;
+}
+
+.daylightAnswer {
+  composes: baseAnswer;
+  color: blackColor;
+}
+
+.midnightAnswer {
+  composes: baseAnswer;
+  color: darkWhiteColor;
+}
+
+.daylightQuestion {
+  composes: baseQuestion;
+  color: blackColor;
+}
+
+.midnightQestion {
+  composes: baseQuestion;
+  color: whiteColor;
+}
+
+.midnightHeaderContainer {
+  composes: baseHeaderContainer;
+  background-color: grayishBlackColor;
+}
+
+.daylightHalvingInfo {
+  composes: baseHalvingInfo;
+  background-color: grayishWhiteColor;
+}
+
+.midnightHalvingInfo {
+  composes: baseHalvingInfo;
+  background-color: blackColor;
+}
+
 .daylightTimerContainer {
+  composes: baseTimeContainer;
   box-shadow: 0 5px 9px rgba(0,0,0,.08), 0 5px 9px rgba(0,0,0,0.4);
   border-radius: 6px;
   color: whiteColor;
 }
 
 .midnightTimerContainer {
+  composes: baseTimeContainer;
 
 }
 
-.daylightHeader {
-  composes: baseHeader;
+.daylightFaqContainer {
+  composes: faqContainer;
+  background-color: whiteColor;
+}
+
+.midnightFaqContainer {
+  composes: faqContainer;
+  background-color: lightBlackColor
+}
+
+.daylightTitle {
+  composes: baseTitle;
   color: fontBlackColor;
-  border-bottom: 1px borderWhiteColor solid;
 }
 
-.midnightHeader {
-  composes: baseHeader;
+.midnightTitle {
+  composes: baseTitle;
   color: whiteColor;
-  border-bottom: 1px borderMidnightColor solid;
 }
 
 .daylightInfoBlock {
   composes: infoBlock;
   box-shadow: 0 5px 9px rgba(0,0,0,.08), 0 5px 9px rgba(0,0,0,0.4);
+  background-color: whiteColor;
 }
 
 .midnightInfoBlock {
   composes: infoBlock;
   color: whiteColor;
   background-color: grayishBlackColor;
+}
+
+.daylightWidgetContainer {
+  composes: widgetContainer;
+  box-shadow: 0 5px 9px rgba(0,0,0,.08), 0 5px 9px rgba(0,0,0,0.4);
 }
 
 @media only screen and (min-width: 700px) {
@@ -150,5 +312,13 @@ h2 {
   .infoBlock:not(:last-child) {
     margin-bottom: 0;
     margin-right: 24px;
+  }
+  .wsWrapper {
+    display: flex;
+  }
+  .widgetContainer {
+    flex: 1 0;
+    margin-bottom: 0;
+    margin-right: 24px
   }
 }
