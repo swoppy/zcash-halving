@@ -6,8 +6,20 @@ export enum Theme {
   MIDNIGHT = 'midnight',
 }
 
-export const GlobalThemeStore = observable.box(Theme.DAYLIGHT);
-export const ThemeContext = React.createContext(Theme.DAYLIGHT);
+const getTheme = (localItem: string | null): Theme => {
+  if (localItem === Theme.DAYLIGHT) {
+    return Theme.DAYLIGHT;
+  }
+  else if (localItem === Theme.MIDNIGHT) {
+    return Theme.MIDNIGHT;
+  }
+  else {
+    return Theme.DAYLIGHT;
+  }
+};
+
+export const GlobalThemeStore = observable.box(getTheme(localStorage.getItem('theme')));
+export const ThemeContext = React.createContext(getTheme(localStorage.getItem('theme')));
 export const ThemeProvider = ThemeContext.Provider;
 export const ThemeConsumer = ThemeContext.Consumer;
 

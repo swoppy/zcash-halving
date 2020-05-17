@@ -161,8 +161,9 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
 
 export const Home = observer(() => {
   const [store] = React.useState(
-    new HomeStore(GlobalThemeStore.get() === Theme.DAYLIGHT ? false : true)
+    new HomeStore(GlobalThemeStore.get() === Theme.MIDNIGHT)
   );
+
   return <BaseHome store={store}/>
 });
 
