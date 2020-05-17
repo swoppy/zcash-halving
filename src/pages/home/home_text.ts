@@ -12,7 +12,7 @@ export default {
   a1: () => `
     Zcash Halving is the event where the number of Zcash Block Reward Subsidy per block will be halved (divided by 2).
     The total number of ZEC mined by miners per block will reduce from 12.5 ZEC to 6.25 ZEC in the next halving at block 1,046,400.
-    Other than the decrease in Block Reward Subsidy, the next Zcash halving will also see the sunsetting on the Zcash`,
+    Other than the decrease in Block Reward Subsidy, the next Zcash halving will also see the sunsetting on the Zcash Founder's Reward.`,
   q2: () => 'What is the Expected Date of the Zcash Halving?',
   a2: () => `
     Zcash halving is block interval specific, this means that the halving will occur once the blockchain
@@ -21,7 +21,17 @@ export default {
     during November 2020.`,
   q3: () => 'Why are Zcash halvings significant?',
   a3: () => `
-    Halvings are at the core of the cryptocurrency economic models because they ensure coins will be issued at a steady pace, following a predictable decaying rate. Such a controlled rate of monetary inflation is one of the main differences between cryptocurrencies and traditional fiat currencies, which essentially have an infinite supply.`,
+    Halvings are at the core of the cryptocurrency economic models because they ensure coins will be issued
+    at a steady pace, following a predictable decaying rate. Such a controlled rate of monetary inflation is
+    one of the main differences between cryptocurrencies and traditional fiat currencies, which essentially
+    have an infinite supply.`,
+  q4: () => 'What is Zcash',
+  a4: () => `
+    Zcash is a peer-to-peer cryptocurrency and was created as a fork of Bitcoin and quite like bitcoin it also
+    has a hard limit of 21 million coins. Zcash started as a fork of the bitcoin blockchain on October 28, 2016.
+    Earlier it was called the Zerocoin protocol before it was transformed into the Zerocash system and then finally,
+    Zcash.But Unlike bitcoin, Zcash aims to provide and enhance privacy for users through some ingenious cryptography called zk-SNARKs.
+    It is being developed by a Electric Coin Company founded by Zooko Wilcox.`,
   stats: () => 'Stats',
   statLabel1: () => 'Total ZEC in circulation',
   statValue1: (value: string) => value,

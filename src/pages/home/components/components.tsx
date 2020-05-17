@@ -112,6 +112,12 @@ export const Faq = () => {
     <div className={styles.faqContainer}>
       <div className={styles.alphaSection}>
         <div className={styles.question}>
+          {text.q4()}
+        </div>
+        <div className={styles.answer}>
+          {text.a4()}
+        </div>
+        <div className={styles.question}>
           {text.q1()}
         </div>
         <div className={styles.answer}>
@@ -135,7 +141,6 @@ export const Faq = () => {
 };
 
 const Widget = () => {
-  const styles = useStyles(themedStyles);
   const theme = GlobalThemeStore.get() === Theme.DAYLIGHT;
   const widget = React.useRef<HTMLDivElement>(null);
 
@@ -150,15 +155,15 @@ const Widget = () => {
       "locale": "en",
       "dateRange": "all",
       "colorTheme": `${theme ? 'light' : 'dark'}`,
-      "trendLineColor": "#37a6ef",
-      "underLineColor": "rgba(55, 166, 239, 0.15)",
+      "trendLineColor": "#f5b728",
+      "underLineColor": "rgba(245, 183, 40, 0.15)",
       "isTransparent": false,
       "autosize": true,
       "largeChartUrl": ""
     });
     widget.current?.appendChild(script);
     return () => {
-      // removing first two element, so it won't overlap when it's time to rerender
+      // removing first two elements, so it won't overlap when it's time to rerender, sort of like a cleanup
       widget.current?.firstElementChild?.remove();
       widget.current?.firstElementChild?.remove();
     };
@@ -222,5 +227,20 @@ export const Stats = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+export const Footer = () => {
+  const styles = useStyles(themedStyles);
+  return (
+    <div className={styles.footerContainer}>
+      <div className={styles.footer}>
+        <div>
+          © 2020 zcashblockhalf. Buit by
+          <a href='https://twitter.com/swoppy_' target='_blank' className={styles.link}> Swoppy</a>, contact
+          <a href='https://twitter.com/AnondranCrypto' target='_blank' className={styles.link}> Anondran</a> for any inquiries
+        </div>
+      </div>
+    </div>   
   );
 };

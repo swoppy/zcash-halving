@@ -8,7 +8,7 @@ import { observer } from 'mobx-react';
 import baseStyles from './home.module.css';
 import text from './home_text';
 import data from './formula';
-import { Renderer, InfoBlocks, Faq, Stats } from './components/components';
+import { Renderer, InfoBlocks, Faq, Stats, Footer } from './components/components';
 
 type HomeStyleProps = {
   headerContainer: string;
@@ -34,6 +34,9 @@ type HomeStyleProps = {
   sheetRow: string;
   statLabel: string;
   statData: string;
+  footerContainer: string;
+  footer: string;
+  link: string;
 };
 
 export const themedStyles: ThemedStyles<HomeStyleProps> = {
@@ -61,6 +64,9 @@ export const themedStyles: ThemedStyles<HomeStyleProps> = {
     sheetRow: baseStyles.daylightSheetRow,
     statLabel: baseStyles.daylightStatLabel,
     statData: baseStyles.daylightStatData,
+    footerContainer: baseStyles.daylightFooterContainer,
+    footer: baseStyles.footer,
+    link: baseStyles.link,
   },
   [Theme.MIDNIGHT]: {
     headerContainer: baseStyles.midnightHeaderContainer,
@@ -81,11 +87,14 @@ export const themedStyles: ThemedStyles<HomeStyleProps> = {
     answer: baseStyles.midnightAnswer,
     statsContainer: baseStyles.midnightStatsContainer,
     wsWrapper: baseStyles.wsWrapper,
-    widgetContainer: baseStyles.widgetContainer,
+    widgetContainer: baseStyles.midnightWidgetContainer,
     statSheet: baseStyles.statSheet,
     sheetRow: baseStyles.midnightSheetRow,
     statLabel: baseStyles.midnightStatLabel,
     statData: baseStyles.midnightStatData,
+    footerContainer: baseStyles.midnightFooterContainer,
+    footer: baseStyles.midnightFooter,
+    link: baseStyles.link,
   },
 };
 
@@ -98,7 +107,7 @@ type BaseHomeProps = {
   store: HomeStore;
 };
 
-/* countdonw formula
+/* countdown formula
   remainingTime = meanBlockTIme * (currentBlock - halvingBlock)
 */
 const BaseHome = observer(({ store }: BaseHomeProps) => {
@@ -155,6 +164,7 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
       </div>
       <Faq/>
       <Stats/>
+      <Footer/>
     </StandardPage>
   );
 });

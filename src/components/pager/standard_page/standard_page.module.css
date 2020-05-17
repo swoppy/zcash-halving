@@ -5,8 +5,6 @@
   box-sizing: border-box;
   min-height: 100%;
   min-width: 100%;
-  /* padding: 0 20px; */
-  font-family: sans-serif;
   user-select: none;
 }
 
@@ -21,7 +19,18 @@
   background: blackColor;
 }
 
+.animation {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
 .container {
   margin: 0 auto;
-  /* max-width: 880px; */
+  composes: animation;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
