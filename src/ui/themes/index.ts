@@ -14,7 +14,7 @@ const getTheme = (localItem: string | null): Theme => {
     return Theme.MIDNIGHT;
   }
   else {
-    return Theme.DAYLIGHT;
+    return Theme.MIDNIGHT;
   }
 };
 

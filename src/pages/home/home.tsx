@@ -9,9 +9,14 @@ import baseStyles from './home.module.css';
 import text from './home_text';
 import data from './formula';
 import { Renderer, InfoBlocks, Faq, Stats, Footer } from './components/components';
+import { SimpleLink } from '../../components/link/link';
 
 type HomeStyleProps = {
   headerContainer: string;
+  leadSection: string;
+  leadsLink: string;
+  binanceLogoWrapper: string;
+  binanceLogo: string;
   themeContainer: string;
   title: string;
   halvingInfo: string;
@@ -37,11 +42,19 @@ type HomeStyleProps = {
   footerContainer: string;
   footer: string;
   link: string;
+  tipBoxConainer: string;
+  qrContainer: string;
+  zecqr: string;
+  ethqr: string;
 };
 
 export const themedStyles: ThemedStyles<HomeStyleProps> = {
   [Theme.DAYLIGHT]: {
     headerContainer: baseStyles.baseHeaderContainer,
+    leadSection: baseStyles.daylightLeadSection,
+    leadsLink: baseStyles.daylightLeadsLink,
+    binanceLogoWrapper: baseStyles.binanceLogoWrapper,
+    binanceLogo: baseStyles.binanceLogo,
     themeContainer: baseStyles.themeContainer,
     title: baseStyles.daylightTitle,
     timerContainer: baseStyles.daylightTimerContainer,
@@ -67,9 +80,17 @@ export const themedStyles: ThemedStyles<HomeStyleProps> = {
     footerContainer: baseStyles.daylightFooterContainer,
     footer: baseStyles.footer,
     link: baseStyles.link,
+    tipBoxConainer: baseStyles.tipBoxContainer,
+    qrContainer: baseStyles.qrContainer,
+    zecqr: baseStyles.zecqr,
+    ethqr: baseStyles.ethqr,
   },
   [Theme.MIDNIGHT]: {
     headerContainer: baseStyles.midnightHeaderContainer,
+    leadSection: baseStyles.midnightLeadSection,
+    leadsLink: baseStyles.midnightLeadsLink,
+    binanceLogoWrapper: baseStyles.binanceLogoWrapper,
+    binanceLogo: baseStyles.binanceLogo,
     themeContainer: baseStyles.themeContainer,
     title: baseStyles.midnightTitle,
     timerContainer: baseStyles.midnightTimerContainer,
@@ -95,13 +116,12 @@ export const themedStyles: ThemedStyles<HomeStyleProps> = {
     footerContainer: baseStyles.midnightFooterContainer,
     footer: baseStyles.midnightFooter,
     link: baseStyles.link,
+    tipBoxConainer: baseStyles.tipBoxContainer,
+    qrContainer: baseStyles.qrContainer,
+    zecqr: baseStyles.zecqr,
+    ethqr: baseStyles.ethqr,
   },
 };
-
-const trimToNumber = (n: any) => {
-  const num = Number(n);
-  return num.toFixed(2);
-}
 
 type BaseHomeProps = {
   store: HomeStore;
@@ -124,27 +144,44 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
     marketCap: 0,
   });
 
+  //  for the countdown data
   React.useEffect(() => {
-    // fetch('https://api.zcha.in/v2/mainnet/network')
-    //   .then(response => response.json())
-    //   .then(data => setHalvingInfo({
-    //     currentBlock: data.blockNumber,
-    //     blockTime: data.meanBlockTime,
-    //     hashrate: data.hashrate,
-    //   }))
+    fetch('https://api.zcha.in/v2/mainnet/network')
+      .then(response => response.json())
+      .then(data => setHalvingInfo({
+        currentBlock: data.blockNumber,
+        blockTime: data.meanBlockTime,
+        hashrate: data.hashrate,
+    }))
+  }, [halvingInfo.blockTime, halvingInfo.currentBlock, halvingInfo.hashrate]);
 
-      // fetch('https://api.coincap.io/v2/assets/zcash')
-      //   .then(response => response.json())
-      //   .then(data => setEconomicInfo(data.data.priceUsd))
+  // for Stats section
+  React.useEffect(() => {
+    fetch('https://api.coincap.io/v2/assets/zcash')
+      .then(response => response.json())
+      .then(api => setEconomicInfo({
+        price: api.data.priceUsd,
+        totalSupply: api.data.maxSupply,
+        circulatingSupply: api.data.supply,
+        marketCap: api.data.marketCapUsd,
+      }))
+  }, [economicInfo.price, economicInfo.totalSupply, economicInfo.circulatingSupply, economicInfo.marketCap])
 
-  }, [halvingInfo, economicInfo]);
-
-  // console.log(Math.trunc(state.blockTime * (data.halvingBlock() - state.currentBlock)));
   const date = Date.now() + Math.trunc(halvingInfo.blockTime * (data.halvingBlock() - halvingInfo.currentBlock)) * 1000;
-  const placeholder = Date.now() + 500000000;
+  
   return (
     <StandardPage>
+      <div className={styles.leadSection}>
+        <div>
+          Buy and trade ZEC at&nbsp;
+        </div>
+        <div className={styles.binanceLogoWrapper}>
+          <div className={styles.binanceLogo}/>
+          <SimpleLink to={text.refLink()} target={'_blank'} text={'Binance.com'} className={styles.leadsLink}/>
+        </div>
+      </div>
       <div className={styles.headerContainer}>
+        
         <div className={styles.themeContainer}>
           <SwitchInput store={store.theme}/>
         </div>
@@ -163,7 +200,11 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
         />
       </div>
       <Faq/>
-      <Stats/>
+      <Stats
+        marketCap={economicInfo.marketCap}
+        totalSupply={economicInfo.totalSupply}
+        circulatingSupply={economicInfo.circulatingSupply}  
+      />
       <Footer/>
     </StandardPage>
   );

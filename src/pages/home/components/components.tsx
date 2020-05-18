@@ -4,6 +4,16 @@ import text from '../home_text';
 import data from '../formula';
 import { useStyles, GlobalThemeStore, Theme } from '../../../ui/themes';
 import { themedStyles } from '../home';
+import { SimpleLink } from '../../../components/link/link';
+
+const formatHashRate = (hashrate: number, decimals: number = 2) => {
+  if (hashrate === 0) return '0 Hash';
+  const h = 1024;
+  const dm = decimals < 0 ? 0 : decimals;
+  const sizes = ['Hash', 'KH', 'MH', 'GH', 'TH', 'PH', 'EH', 'ZH', 'YH'];
+  const i = Math.floor(Math.log(hashrate) / Math.log(h));
+  return parseFloat((hashrate / Math.pow(h, i)).toFixed(dm)) + ' ' + sizes[i];
+}
 
 type RendererProps = {
   days: number;
@@ -12,49 +22,48 @@ type RendererProps = {
   seconds: number;
 };
 
-/*  Unable to typecheck css in this component as <Countdown> doesnt accept renderer with hooks (useStyles)
+/*  component <Renderer> Unable to typecheck css in this component as <Countdown> doesnt accept renderer with hooks (useStyles)
     so I just used baseStyles directly
     TODO: much better is if we have internal timer component but takes too much time
 */
 export const Renderer = ({ days, hours, minutes, seconds }: RendererProps) => {
+  const details: { time: number, label: string}[] = [
+    {
+      time: days,
+      label: text.days(),
+    },
+    {
+      time: hours,
+      label: text.hours(),
+    },
+    {
+      time: minutes,
+      label: text.minutes(),
+    },
+    {
+      time: seconds,
+      label: text.seconds(),
+    },
+  ];
+
   return (
     <div className={baseStyles.timer}>
       <div className={baseStyles.logoContainer}>
         <div className={baseStyles.figureLogo}/>
       </div>
       <div className={baseStyles.countdownContainer}>
-        <div className={baseStyles.timerColumn}>
-          <span className={baseStyles.number}>
-            {days}
-          </span>
-          <span className={baseStyles.timeLabel}>
-            {text.days()}
-          </span>
-        </div>
-        <div className={baseStyles.timerColumn}>
-          <span className={baseStyles.number}>
-            {hours}
-          </span>
-          <span className={baseStyles.timeLabel}>
-            {text.hours()}
-          </span>
-        </div>
-        <div className={baseStyles.timerColumn}>
-          <span className={baseStyles.number}>
-            {minutes}
-          </span>
-          <span className={baseStyles.timeLabel}>
-            {text.minutes()}
-          </span>
-        </div>
-        <div className={baseStyles.timerColumn}>
-          <span className={baseStyles.number}>
-            {seconds}
-          </span>
-          <span className={baseStyles.timeLabel}>
-            {text.seconds()}
-          </span>
-        </div>
+        {details.map((item, key) => {
+          return (
+            <div className={baseStyles.timerColumn} key={key}>
+              <span className={baseStyles.number}>
+                {item.time}
+              </span>
+              <span className={baseStyles.timeLabel}>
+                {item.label}
+              </span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -68,73 +77,77 @@ type InfoBlocksProps = {
 
 export const InfoBlocks = ({ currentBlock, meanBlockTime, hashrate }: InfoBlocksProps) => {
   const styles = useStyles(themedStyles);
+  const blockDetails: { label: string, blockStat: number | string }[] = [
+    {
+      label: text.currentHeight(),
+      blockStat: currentBlock,
+    },
+    {
+      label: text.meanTime(),
+      blockStat: meanBlockTime.toFixed(1) + 's',
+    },
+    {
+      label: text.untilHaving(),
+      blockStat: data.halvingBlock() - currentBlock,
+    },
+    {
+      label: text.hashrate(),
+      blockStat: formatHashRate(hashrate),
+    },
+  ]
   return (
     <div className={styles.infoBlocks}>
-      <div className={styles.infoBlock}>
-        <span className={styles.data}>
-          {currentBlock}
-        </span>
-        <span className={styles.label}>
-          {text.currentHeight()}
-        </span>
-      </div>
-      <div className={styles.infoBlock}>
-        <span className={styles.data}>
-          {Math.trunc(meanBlockTime)} s
-        </span>
-        <span className={styles.label}>
-          {text.meanTime()}
-        </span>
-      </div>
-      <div className={styles.infoBlock}>
-        <span className={styles.data}>
-          {data.halvingBlock() - currentBlock}
-        </span>
-        <span className={styles.label}>
-          {text.untilHaving()}
-        </span>
-      </div>
-      <div className={styles.infoBlock}>
-        <span className={styles.data}>
-          {hashrate}
-        </span>
-        <span className={styles.label}>
-          {text.hashrate()}
-        </span>
-      </div>
+      {blockDetails.map((item, key) => {
+        return (
+          <div className={styles.infoBlock} key={key}>
+            <span className={styles.data}>
+              {item.blockStat}
+            </span>
+            <span className={styles.label}>
+              {item.label}
+            </span>
+          </div>
+        );
+      })}
     </div>
   );
 };
 
 export const Faq = () => {
   const styles = useStyles(themedStyles);
+  const faqDetails: { question: string, answer: string }[] = [
+    {
+      question: text.q4(),
+      answer: text.a4(),
+    },
+    {
+      question: text.q1(),
+      answer: text.a1(),
+    },
+    {
+      question: text.q2(),
+      answer: text.a2(),
+    },
+    {
+      question: text.q3(),
+      answer: text.a3(),
+    },
+  ];
   return (
     <div className={styles.faqContainer}>
       <div className={styles.alphaSection}>
-        <div className={styles.question}>
-          {text.q4()}
-        </div>
-        <div className={styles.answer}>
-          {text.a4()}
-        </div>
-        <div className={styles.question}>
-          {text.q1()}
-        </div>
-        <div className={styles.answer}>
-          {text.a1()}
-        </div>
-        <div className={styles.question}>
-          {text.q2()}
-        </div>
-        <div className={styles.answer}>
-          {text.a2()}
-        </div>
-        <div className={styles.question}>
-          {text.q3()}
-        </div>
-        <div className={styles.answer}>
-          {text.a3()}
-        </div>
+        {faqDetails.map((item, key) => {
+          return (
+            <div key={key}>
+              <div className={styles.question}>
+                {item.question}
+              </div>
+              <div className={styles.answer}>
+                {item.answer}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -145,11 +158,12 @@ const Widget = () => {
   const widget = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
+    const currentElm = widget.current;
     const script = document.createElement('script');
     script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js'
     script.async = true;
     script.innerHTML = JSON.stringify({
-      "symbol": "BITFINEX:ZECUSD",
+      "symbol": "BINANCE:ZECUSDT",
       "width": "100%",
       "height": "100%",
       "locale": "en",
@@ -161,11 +175,11 @@ const Widget = () => {
       "autosize": true,
       "largeChartUrl": ""
     });
-    widget.current?.appendChild(script);
+    currentElm?.appendChild(script);
     return () => {
       // removing first two elements, so it won't overlap when it's time to rerender, sort of like a cleanup
-      widget.current?.firstElementChild?.remove();
-      widget.current?.firstElementChild?.remove();
+      currentElm?.firstElementChild?.remove();
+      currentElm?.firstElementChild?.remove();
     };
   }, [theme])
   return (
@@ -175,13 +189,31 @@ const Widget = () => {
 };
 
 type StatsProps = {
-  totalCirculation: string;
-  totalSupply: string;
-  percentage: string;
+  totalSupply: number;
+  circulatingSupply: number;
+  marketCap: number;
 };
 
-export const Stats = () => {
+export const Stats = ({ totalSupply, circulatingSupply, marketCap }: StatsProps) => {
   const styles = useStyles(themedStyles);
+  const statDetails: { label: string, figures: string | number }[] = [
+    {
+      label: text.zecMarketCap(),
+      figures: Math.trunc(marketCap).toLocaleString(),
+    },
+    {
+      label: text.zecInCirculation(),
+      figures: Math.trunc(circulatingSupply).toLocaleString(),
+    },
+    {
+      label: text.zecSupply(),
+      figures: Math.trunc(totalSupply).toLocaleString(),
+    },
+    {
+      label: text.percentMined(),
+      figures: Math.trunc(circulatingSupply/totalSupply * 100) ? Math.trunc(circulatingSupply/totalSupply * 100) + '%' : 0,
+    },
+  ]
   return (
     <div className={styles.statsContainer}>
       <div className={styles.wsWrapper}>
@@ -192,38 +224,18 @@ export const Stats = () => {
           <div className={styles.question}>
             {text.stats()}
           </div>
-          <div className={`${styles.sheetRow} ${baseStyles.sheetRow}`}>
-            <span className={styles.statLabel}>
-              {text.statLabel1()}
-            </span>
-            <span className={styles.statData}>
-              123123123123
-            </span>
-          </div>
-          <div className={`${styles.sheetRow} ${baseStyles.sheetRow}`}>
-            <span className={styles.statLabel}>
-              {text.statLabel2()}
-            </span>
-            <span className={styles.statData}>
-              123123123123
-            </span>
-          </div>
-          <div className={`${styles.sheetRow} ${baseStyles.sheetRow}`}>
-            <span className={styles.statLabel}>
-              {text.statLabel3()}
-            </span>
-            <span className={styles.statData}>
-              87623487
-            </span>
-          </div>
-          <div className={`${styles.sheetRow} ${baseStyles.sheetRow}`}>
-            <span className={styles.statLabel}>
-              {text.statLabel4()}
-            </span>
-            <span className={styles.statData}>
-              123123123123
-            </span>
-          </div>
+          {statDetails.map((item, key) => {
+            return (
+              <div className={`${styles.sheetRow} ${baseStyles.sheetRow}`} key={key}>
+                <span className={styles.statLabel}>
+                  {item.label}
+                </span>
+                <span className={styles.statData}>
+                  {item.figures}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -236,9 +248,20 @@ export const Footer = () => {
     <div className={styles.footerContainer}>
       <div className={styles.footer}>
         <div>
-          © 2020 zcashblockhalf. Buit by
-          <a href='https://twitter.com/swoppy_' target='_blank' className={styles.link}> Swoppy</a>, contact
-          <a href='https://twitter.com/AnondranCrypto' target='_blank' className={styles.link}> Anondran</a> for any inquiries
+          © 2020 zcashblockhalf. Built by
+          <SimpleLink to={text.twitterSwoppy()} target={'_blank'} text={' Swoppy'} className={styles.link}/>,
+          contact
+          <SimpleLink to={text.anondranCrypto()} target={'_blank'} text={' AnondranCrypto'} className={styles.link}/> for any inquiries.
+        </div>
+        <div className={styles.tipBoxConainer}>
+          <div className={styles.qrContainer}>
+            <div className={styles.ethqr}/>
+            <span>{text.ethLabel()}</span>
+          </div>
+          <div className={styles.qrContainer}>
+            <div className={styles.zecqr}/>
+            <span>{text.zecLabel()}</span>
+          </div>
         </div>
       </div>
     </div>   

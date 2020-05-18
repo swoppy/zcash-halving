@@ -1,16 +1,42 @@
 @value fontBlackColor, whiteColor, borderWhiteColor from '../../assets/colors.css';
 @value borderMidnightColor, grayishBlackColor, zcashYellowColor from '../../assets/colors.css';
 @value grayishWhiteColor, darkWhiteColor, lightBlackColor from '../../assets/colors.css';
-@value widgetColor, blackColor from '../../assets/colors.css';
+@value widgetColor, blackColor, twitterBlueColor from '../../assets/colors.css';
+@value greenColor, baseBlackColor from '../../assets/colors.css';
 @value maxWidth: 880px;
 
 h2 {
   margin: 0;
-  padding: 5px 0 5px 0;
+  padding: 5px 0 10px 0;
+}
+
+.baseImg {
+  display: flex;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .baseHeaderContainer {
   padding: 0 20px;
+}
+
+.leadSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: zcashYellowColor;
+  padding: 10px 0;
+  font-weight: 700;
+  font-size: 28px;
+}
+
+.binanceLogo {
+  composes: baseImg;
+  align-self: center;
+  width: 22px;
+  height: 22px;
+  background-image: url('../../assets/img/binance256.png')
 }
 
 .themeContainer {
@@ -49,15 +75,6 @@ h2 {
   justify-content: center;
 }
 
-.baseImg {
-  width: 80px;
-  height: 80px;
-  cursor: pointer;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
 .countdownContainer {
   display: flex;
   font-weight: 600;
@@ -91,6 +108,8 @@ h2 {
 
 .figureLogo {
   composes: baseImg;
+  width: 80px;
+  height: 80px;
   background-image: url('../../assets/img/zcash_logo.png');
 }
 
@@ -106,6 +125,7 @@ h2 {
   align-items: center;
   flex: 1 0;
   border-radius: 6px;
+  justify-content: center;
 }
 
 .infoBlock:not(:last-child) {
@@ -151,8 +171,8 @@ h2 {
 .baseAnswer {
   font-size: 16px;
   font-weight: 300;
-  margin-bottom: 14px;
-  line-height: 1.4;
+  margin-bottom: 20px;
+  line-height: 1.6;
 }
 
 .statsContainer {
@@ -182,11 +202,14 @@ h2 {
 }
 
 .footer {
+  display: flex;
+  flex-direction: column-reverse;
   padding: 40px 40px;
   font-weight: 600;
   font-size: 14px;
   max-width: maxWidth;
   margin: 0 auto;
+  align-items: flex-end;
 }
 
 .link {
@@ -195,7 +218,66 @@ h2 {
 }
 
 .link:hover {
-  color: red;
+  color: twitterBlueColor;
+}
+
+.leadsLink {
+  text-decoration: none;
+}
+
+.binanceLogoWrapper {
+  display: flex;
+  border-bottom: 1px solid zcashYellowColor;
+}
+
+.binanceLogoWrapper:hover {
+  border-bottom: 1px solid baseBlackColor;
+}
+
+.tipBoxContainer {
+  display: flex;
+}
+
+.tipBox {
+  composes: baseImg;
+  width: 78px;
+  height: 78px;
+  margin: 0 10px;
+}
+
+.qrContainer {
+  text-align: center;
+  font-weight: 600;
+}
+
+.zecqr {
+  composes: tipBox;
+  background-image: url('../../assets//img/zectip.png');
+}
+
+.ethqr {
+  composes: tipBox;
+  background-image: url('../../assets//img/ethtip.png');
+}
+
+.daylightLeadsLink {
+  composes: leadsLink;
+  color: whiteColor;
+}
+
+.midnightLeadsLink {
+  composes: leadsLink;
+  color: baseBlackColor;
+}
+
+.daylightLeadSection {
+  composes: leadSection;
+  color: whiteColor;
+}
+
+.midnightLeadSection {
+  composes: leadSection;
+  color: baseBlackColor;
 }
 
 .daylightFooterContainer {
@@ -357,5 +439,16 @@ h2 {
     flex: 1 0;
     margin-bottom: 0;
     margin-right: 24px
+  }
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .leadSection {
+    flex-direction: row;
+    justify-content: center;
   }
 }

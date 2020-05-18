@@ -1,3 +1,4 @@
+@value baseBlackColor: #000000;
 @value blackColor: #2e2e2e;
 @value grayishBlackColor: #353a40;
 @value whiteColor: #ffffff;
@@ -9,3 +10,5 @@
 @value lightBlackColor: #373737;
 @value darkWhiteColor: #d1d1d1;
 @value widgetColor: #1d2331;
+@value twitterBlueColor: #1ca1f1;
+@value greenColor: #10d876;
