@@ -36,7 +36,8 @@ h2 {
   align-self: center;
   width: 22px;
   height: 22px;
-  background-image: url('../../assets/img/binance256.png')
+  background-image: url('../../assets/img/binance256.png');
+  margin-right: 2px;
 }
 
 .themeContainer {
@@ -236,6 +237,8 @@ h2 {
 
 .tipBoxContainer {
   display: flex;
+  align-self: center;
+  margin-bottom: 20px;
 }
 
 .tipBox {
@@ -443,6 +446,9 @@ h2 {
   .footer {
     flex-direction: row;
     justify-content: space-between;
+  }
+  .tipBoxContainer {
+    margin-bottom: 0;
   }
 }
 
