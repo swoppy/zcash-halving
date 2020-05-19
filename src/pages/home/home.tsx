@@ -46,6 +46,7 @@ type HomeStyleProps = {
   qrContainer: string;
   zecqr: string;
   ethqr: string;
+  tooltiptext: string;
 };
 
 export const themedStyles: ThemedStyles<HomeStyleProps> = {
@@ -84,6 +85,7 @@ export const themedStyles: ThemedStyles<HomeStyleProps> = {
     qrContainer: baseStyles.qrContainer,
     zecqr: baseStyles.zecqr,
     ethqr: baseStyles.ethqr,
+    tooltiptext: baseStyles.tooltiptext,
   },
   [Theme.MIDNIGHT]: {
     headerContainer: baseStyles.midnightHeaderContainer,
@@ -120,6 +122,7 @@ export const themedStyles: ThemedStyles<HomeStyleProps> = {
     qrContainer: baseStyles.qrContainer,
     zecqr: baseStyles.zecqr,
     ethqr: baseStyles.ethqr,
+    tooltiptext: baseStyles.tooltiptext,
   },
 };
 

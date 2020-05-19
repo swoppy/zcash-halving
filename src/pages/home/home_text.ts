@@ -43,4 +43,6 @@ export default {
   anondranCrypto: () => 'https://twitter.com/AnondranCrypto',
   ethLabel: () => 'Tip ETH',
   zecLabel: () => 'Tip ZEC',
+  ethAddress: () => '0x7A16Cd69ae74c8804AA5Bf09eD54Fb36628AF7EA',
+  zecAddress: () => 't1gmqwB7mv8TEau6iZxPyg9VRz2PV6cUvfG',
 };

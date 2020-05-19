@@ -257,10 +257,12 @@ export const Footer = () => {
           <div className={styles.qrContainer}>
             <div className={styles.ethqr}/>
             <span>{text.ethLabel()}</span>
+            <span className={styles.tooltiptext}>{text.ethAddress()}</span>
           </div>
           <div className={styles.qrContainer}>
             <div className={styles.zecqr}/>
             <span>{text.zecLabel()}</span>
+            <span className={styles.tooltiptext}>{text.zecAddress()}</span>
           </div>
         </div>
       </div>

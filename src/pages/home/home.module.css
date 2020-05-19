@@ -251,6 +251,38 @@ h2 {
 .qrContainer {
   text-align: center;
   font-weight: 600;
+  position: relative;
+}
+
+.qrContainer .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: baseBlackColor;
+  color: whiteColor;
+  text-align: center;
+  border-radius: 6px;
+  padding: 6px 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 108%;
+  left: 50%;
+  margin-left: -60px;
+  overflow-wrap: break-word;
+}
+
+.qrContainer .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.qrContainer:hover .tooltiptext {
+  visibility: visible;
 }
 
 .zecqr {
