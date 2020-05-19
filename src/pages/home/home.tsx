@@ -8,8 +8,7 @@ import { observer } from 'mobx-react';
 import baseStyles from './home.module.css';
 import text from './home_text';
 import data from './formula';
-import { Renderer, InfoBlocks, Faq, Stats, Footer } from './components/components';
-import { SimpleLink } from '../../components/link/link';
+import { Renderer, InfoBlocks, Faq, Stats, Footer, LeadSection } from './components/components';
 
 type HomeStyleProps = {
   headerContainer: string;
@@ -174,17 +173,8 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
   
   return (
     <StandardPage>
-      <div className={styles.leadSection}>
-        <div>
-          Buy and trade ZEC at&nbsp;
-        </div>
-        <div className={styles.binanceLogoWrapper}>
-          <div className={styles.binanceLogo}/>
-          <SimpleLink to={text.refLink()} target={'_blank'} text={'Binance.com'} className={styles.leadsLink}/>
-        </div>
-      </div>
+      <LeadSection/>
       <div className={styles.headerContainer}>
-        
         <div className={styles.themeContainer}>
           <SwitchInput store={store.theme}/>
         </div>

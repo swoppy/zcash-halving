@@ -3,7 +3,7 @@ import React from 'react';
 type SimpleLinkProps = {
   to: string;
   target: string;
-  text: string;
+  text: string | React.ReactNode;
   className?: string;
 };
 

@@ -15,6 +15,23 @@ const formatHashRate = (hashrate: number, decimals: number = 2) => {
   return parseFloat((hashrate / Math.pow(h, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
+export const LeadSection = () => {
+  const styles = useStyles(themedStyles);
+  return (
+    <a href={text.refLink()} rel="noopener noreferrer" target={'_blank'} style={{ textDecoration: 'none' }}>
+      <div className={styles.leadSection}>
+      <div>
+        Buy and trade ZEC at&nbsp;
+      </div>
+      <div className={styles.binanceLogoWrapper}>
+        <div className={styles.binanceLogo}/>
+        <SimpleLink to={text.refLink()} target={'_blank'} text={'Binance.com'} className={styles.leadsLink}/>
+      </div>
+      </div>
+    </a>
+  );
+};
+
 type RendererProps = {
   days: number;
   hours: number;
