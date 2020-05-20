@@ -5,6 +5,7 @@ import data from '../formula';
 import { useStyles, GlobalThemeStore, Theme } from '../../../ui/themes';
 import { themedStyles } from '../home';
 import { SimpleLink } from '../../../components/link/link';
+import ReactHtmlParser from 'react-html-parser';
 
 const formatHashRate = (hashrate: number, decimals: number = 2) => {
   if (hashrate === 0) return '0 Hash';
@@ -165,6 +166,12 @@ export const Faq = () => {
             </div>
           );
         })}
+        <div className={styles.question}>
+          {text.q5()}
+        </div>
+        <div className={styles.answer}>
+          {ReactHtmlParser(text.a5(text.refLink(), 'Binance', styles.link))}
+        </div>
       </div>
     </div>
   );

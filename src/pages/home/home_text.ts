@@ -25,13 +25,19 @@ export default {
     at a steady pace, following a predictable decaying rate. Such a controlled rate of monetary inflation is
     one of the main differences between cryptocurrencies and traditional fiat currencies, which essentially
     have an infinite supply.`,
-  q4: () => 'What is Zcash',
+  q4: () => 'What is Zcash?',
   a4: () => `
     Zcash is a peer-to-peer cryptocurrency and was created as a fork of Bitcoin and quite like bitcoin it also
     has a hard limit of 21 million coins. Zcash started as a fork of the bitcoin blockchain on October 28, 2016.
     Earlier it was called the Zerocoin protocol before it was transformed into the Zerocash system and then finally,
-    Zcash.But Unlike bitcoin, Zcash aims to provide and enhance privacy for users through some ingenious cryptography called zk-SNARKs.
-    It is being developed by a Electric Coin Company founded by Zooko Wilcox.`,
+    Zcash. But Unlike bitcoin, Zcash aims to provide and enhance privacy for users through some ingenious cryptography called zk-SNARKs.
+    It is being developed by Electric Coin Company founded by Zooko Wilcox.`,
+  q5: () => 'How to buy Zcash?',
+  a5: (to: string, text: string, style: string) => `
+    ZEC is the currency symbol for Zcash, you can buy and trade them at numerous exchanges such as 
+    <a href=${to} rel='noopener noreferrer' target='_blank' class=${style}>${text}</a> and others. 
+    Binance was launched in 2017 and has become the world\'s leading cryptocurrency exchange, has 500+ markets and more than 4 billion (USD)
+    in daily trading volume.`, // this is kinda ugly :)
   stats: () => 'Stats',
   zecInCirculation: () => 'Total ZEC in circulation',
   zecSupply: () => 'Total ZEC supply',

@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "zcash-halving-test"
+    "default": "zcash-halving-test",
+    "prod": "zec-halving"
   }
 }
