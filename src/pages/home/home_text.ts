@@ -34,9 +34,10 @@ export default {
     It is being developed by Electric Coin Company founded by Zooko Wilcox.`,
   q5: () => 'How to buy Zcash?',
   a5: (to: string, text: string, style: string) => `
-    ZEC is the currency symbol for Zcash, you can buy and trade them at numerous exchanges such as 
+    ZEC is the currency symbol for Zcash, you can buy and trade them at numerous exchanges such as
     <a href=${to} rel='noopener noreferrer' target='_blank' class=${style}>${text}</a> and others. 
-    Binance was launched in 2017 and has become the world\'s leading cryptocurrency exchange, has 500+ markets and more than 4 billion (USD)
+    Binance was launched in 2017 and has become the world\'s leading cryptocurrency exchange,
+    has 500+ markets and more than 4 billion (USD)
     in daily trading volume.`, // this is kinda ugly :)
   stats: () => 'Stats',
   zecInCirculation: () => 'Total ZEC in circulation',
