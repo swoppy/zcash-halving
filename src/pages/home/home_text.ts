@@ -36,7 +36,7 @@ export default {
   a5: (to: string, text: string, style: string) => `
     ZEC is the currency symbol for Zcash, you can buy and trade them at numerous exchanges such as
     <a href=${to} rel='noopener noreferrer' target='_blank' class=${style}>${text}</a> and others. 
-    Binance was launched in 2017 and has become the world\'s leading cryptocurrency exchange,
+    Binance was launched in 2017 and has become the world's leading cryptocurrency exchange,
     has 500+ markets and more than 4 billion (USD)
     in daily trading volume.`, // this is kinda ugly :)
   stats: () => 'Stats',

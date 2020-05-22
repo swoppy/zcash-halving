@@ -146,13 +146,15 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
     marketCap: 0,
   });
 
-  //  for the countdown data
+  /*  for the countdown data
+  * use a constant mean block time of 75s before 1011800 (approx. 30 days before halving) but after it will be dynanmic
+  */
   React.useEffect(() => {
     fetch('https://api.zcha.in/v2/mainnet/network')
       .then(response => response.json())
       .then(data => setHalvingInfo({
         currentBlock: data.blockNumber,
-        blockTime: data.meanBlockTime,
+        blockTime: data.blockNumber > 1011800 ? data.meanBlockTime : 75, // as per revsion
         hashrate: data.hashrate,
     }))
   }, [halvingInfo.blockTime, halvingInfo.currentBlock, halvingInfo.hashrate]);
