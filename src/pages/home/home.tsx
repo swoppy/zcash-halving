@@ -185,7 +185,7 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
         </div>
       </div>
       <div className={styles.halvingInfo}>
-        <div className={styles.timerContainer}>
+        <div className={styles.timerContainer} id='countdownTimer'>
           <Countdown date={date} renderer={Renderer}/>
         </div>
         <InfoBlocks
