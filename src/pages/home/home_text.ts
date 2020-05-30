@@ -8,6 +8,8 @@ export default {
   meanTime: () => 'Block mean time',
   untilHaving: () => 'Blocks till halving',
   hashrate: () => 'Hashrate',
+  siteUrl: () => 'https://zcashblockhalf.com',
+  title: () => 'Zcash block reward halving',
   q1: () => 'What is the Zcash Halving?',
   a1: () => `
     Zcash Halving is the event where the number of Zcash Block Reward Subsidy per block will be halved (divided by 2).
@@ -45,7 +47,7 @@ export default {
   percentMined: () => 'Percentage of ZEC mined',
   zecMarketCap: () => 'ZEC marketcap (USD)',
   zecPrice: () => 'ZEC price (USD)',
-  refLink: () => 'https://accounts.binance.com/en/register?ref=FOPFM9RP',
+  refLink: () => 'https://bit.ly/zcashblockhalf',
   twitterSwoppy: () => 'https://twitter.com/swoppy_',
   anondranCrypto: () => 'https://twitter.com/AnondranCrypto',
   ethLabel: () => 'Tip ETH',

@@ -9,6 +9,7 @@ import baseStyles from './home.module.css';
 import text from './home_text';
 import data from './formula';
 import { Renderer, InfoBlocks, Faq, Stats, Footer, LeadSection } from './components/components';
+import { Helmet } from 'react-helmet';
 
 type HomeStyleProps = {
   headerContainer: string;
@@ -175,6 +176,13 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
   
   return (
     <StandardPage>
+      <Helmet>
+        <meta name='og:title' content={text.title()}/>
+        <meta name='og:url' content={text.siteUrl()}/>
+        <meta name='description' content={text.a1()}/>
+        <meta name='og:description' content={text.a1()}/>
+        <meta name='og:description' content={text.a4()}/>
+      </Helmet>
       <LeadSection/>
       <div className={styles.headerContainer}>
         <div className={styles.themeContainer}>
