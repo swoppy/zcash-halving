@@ -177,11 +177,11 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
   return (
     <StandardPage>
       <Helmet>
-        <meta name='og:title' content={text.title()}/>
+        <title>{text.altTitle()}</title>
+        <meta name='description' content={text.metaDesc()}/>
+        <meta name='og:title' content={text.altTitle()}/>
         <meta name='og:url' content={text.siteUrl()}/>
-        <meta name='description' content={text.a1()}/>
-        <meta name='og:description' content={text.a1()}/>
-        <meta name='og:description' content={text.a4()}/>
+        <meta name='og:description' content={text.metaDesc()}/>
       </Helmet>
       <LeadSection/>
       <div className={styles.headerContainer}>
