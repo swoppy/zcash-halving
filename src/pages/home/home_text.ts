@@ -11,6 +11,7 @@ export default {
   siteUrl: () => 'https://zcashblockhalf.com',
   title: () => 'Zcash block reward halving',
   altTitle: () => 'Zcash halving countdown',
+  eta: (date: string) => `ETA date: ${date}`,
   metaDesc: () => 'Zcash halving is block interval specific, this means that the halving will occur once the blockchain reached a certain block interval.',
   q1: () => 'What is the Zcash Halving?',
   a1: () => `

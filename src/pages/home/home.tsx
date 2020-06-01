@@ -47,6 +47,8 @@ type HomeStyleProps = {
   zecqr: string;
   ethqr: string;
   tooltiptext: string;
+  approxDate: string;
+  screenshotView: string;
 };
 
 export const themedStyles: ThemedStyles<HomeStyleProps> = {
@@ -86,6 +88,8 @@ export const themedStyles: ThemedStyles<HomeStyleProps> = {
     zecqr: baseStyles.zecqr,
     ethqr: baseStyles.ethqr,
     tooltiptext: baseStyles.tooltiptext,
+    approxDate: baseStyles.daylightApproxDate,
+    screenshotView: baseStyles.screenshotView,
   },
   [Theme.MIDNIGHT]: {
     headerContainer: baseStyles.midnightHeaderContainer,
@@ -123,6 +127,8 @@ export const themedStyles: ThemedStyles<HomeStyleProps> = {
     zecqr: baseStyles.zecqr,
     ethqr: baseStyles.ethqr,
     tooltiptext: baseStyles.tooltiptext,
+    approxDate: baseStyles.midnightApproxDate,
+    screenshotView: baseStyles.screenshotView,
   },
 };
 
@@ -173,15 +179,19 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
   }, [economicInfo.price, economicInfo.totalSupply, economicInfo.circulatingSupply, economicInfo.marketCap])
 
   const date = Date.now() + Math.trunc(halvingInfo.blockTime * (data.halvingBlock() - halvingInfo.currentBlock)) * 1000;
-  
+  const localDate = new Date(date).toUTCString();
+  const dateUTC = localDate.replace(/GMT/gi, 'UTC');
   return (
     <StandardPage>
       <Helmet>
         <title>{text.altTitle()}</title>
         <meta name='description' content={text.metaDesc()}/>
-        <meta name='og:title' content={text.altTitle()}/>
-        <meta name='og:url' content={text.siteUrl()}/>
-        <meta name='og:description' content={text.metaDesc()}/>
+        <meta property='og:title' content={text.altTitle()}/>
+        <meta property='og:url' content={text.siteUrl()}/>
+        <meta property='og:description' content={text.metaDesc()}/>
+        <meta property='twitter:title' content={text.altTitle()}/>
+        <meta property='twitter:url' content={text.siteUrl()}/>
+        <meta property='twitter:description' content={text.metaDesc()}/>
       </Helmet>
       <LeadSection/>
       <div className={styles.headerContainer}>
@@ -193,8 +203,11 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
         </div>
       </div>
       <div className={styles.halvingInfo}>
-        <div className={styles.timerContainer} id='countdownTimer'>
-          <Countdown date={date} renderer={Renderer}/>
+        <div className={styles.screenshotView} id='countdownTimer'>
+          <div className={styles.approxDate}>{text.eta(dateUTC)}</div>
+          <div className={styles.timerContainer}>
+            <Countdown date={date} renderer={Renderer}/>
+          </div>
         </div>
         <InfoBlocks
           currentBlock={halvingInfo.currentBlock}

@@ -25,11 +25,4 @@
 
 .container {
   margin: 0 auto;
-  composes: animation;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
 }

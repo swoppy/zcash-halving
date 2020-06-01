@@ -10,6 +10,11 @@ h2 {
   padding: 5px 0 10px 0;
 }
 
+.screenshotView {
+  max-width: maxWidth;
+  margin: 0 auto;
+}
+
 .baseImg {
   display: flex;
   background-size: contain;
@@ -51,6 +56,14 @@ h2 {
   text-align: center;
   max-width: maxWidth;
   margin: 0 auto;
+}
+
+.approxDate {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  padding: 6px 0;
+  font-weight: 500;
 }
 
 .baseHalvingInfo {
@@ -295,6 +308,16 @@ h2 {
   background-image: url('../../assets//img/ethtip.png');
 }
 
+.daylightApproxDate {
+  composes: approxDate;
+  color: blackColor;
+}
+
+.midnightApproxDate {
+  composes: approxDate;
+  color: darkWhiteColor;
+}
+
 .daylightLeadsLink {
   composes: leadsLink;
   color: whiteColor;
@@ -481,6 +504,9 @@ h2 {
   }
   .tipBoxContainer {
     margin-bottom: 0;
+  }
+  .approxDate {
+    justify-content: flex-start
   }
 }
 
