@@ -268,6 +268,24 @@ export const Stats = ({ totalSupply, circulatingSupply, marketCap }: StatsProps)
 
 export const Footer = () => {
   const styles = useStyles(themedStyles);
+  const tipDetails: { label: string, tooltip: string, style: string, }[] = [
+    {
+      label: text.ethLabel(),
+      tooltip: text.ethAddress(),
+      style: styles.ethqr,
+    },
+    {
+      label: text.tZecLabel(),
+      tooltip: text.zecTAddress(),
+      style: styles.zecqr,
+    },
+    {
+      label: text.zZecLabel(),
+      tooltip: text.zecZAddress(),
+      style: styles.zZecqr,
+    },
+  ];
+  
   return (
     <div className={styles.footerContainer}>
       <div className={styles.footer}>
@@ -278,16 +296,15 @@ export const Footer = () => {
           <SimpleLink to={text.anondranCrypto()} target={'_blank'} text={' AnondranCrypto'} className={styles.link}/> for any inquiries.
         </div>
         <div className={styles.tipBoxConainer}>
-          <div className={styles.qrContainer}>
-            <div className={styles.ethqr}/>
-            <span>{text.ethLabel()}</span>
-            <span className={styles.tooltiptext}>{text.ethAddress()}</span>
-          </div>
-          <div className={styles.qrContainer}>
-            <div className={styles.zecqr}/>
-            <span>{text.zecLabel()}</span>
-            <span className={styles.tooltiptext}>{text.zecAddress()}</span>
-          </div>
+          {tipDetails.map((item, key) => {
+            return (
+              <div className={styles.qrContainer} key={key}>
+                <div className={item.style}/>
+                <span>{item.label}</span>
+                <span className={styles.tooltiptext}>{item.tooltip}</span>
+              </div>
+            )
+          })}
         </div>
       </div>
     </div>   

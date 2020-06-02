@@ -54,7 +54,9 @@ export default {
   twitterSwoppy: () => 'https://twitter.com/swoppy_',
   anondranCrypto: () => 'https://twitter.com/AnondranCrypto',
   ethLabel: () => 'Tip ETH',
-  zecLabel: () => 'Tip ZEC',
+  tZecLabel: () => 'Tip t-ZEC',
+  zZecLabel: () => 'Tip z-ZEC',
   ethAddress: () => '0x7A16Cd69ae74c8804AA5Bf09eD54Fb36628AF7EA',
-  zecAddress: () => 't1gmqwB7mv8TEau6iZxPyg9VRz2PV6cUvfG',
+  zecTAddress: () => 't1gmqwB7mv8TEau6iZxPyg9VRz2PV6cUvfG',
+  zecZAddress: () => 'zs1hqddkfx49vzlu33pa5fnqlv2vgq869w5m552hlfwzqwfwam5s7menjx934ndr4d994k7g95mp7p',
 };

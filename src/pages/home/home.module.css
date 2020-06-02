@@ -300,12 +300,17 @@ h2 {
 
 .zecqr {
   composes: tipBox;
-  background-image: url('../../assets//img/zectip.png');
+  background-image: url('../../assets/img/zectip.png');
+}
+
+.zZecqr {
+  composes: tipBox;
+  background-image: url('../../assets/img/zzectip.png');
 }
 
 .ethqr {
   composes: tipBox;
-  background-image: url('../../assets//img/ethtip.png');
+  background-image: url('../../assets/img/ethtip.png');
 }
 
 .daylightApproxDate {

@@ -45,6 +45,7 @@ type HomeStyleProps = {
   tipBoxConainer: string;
   qrContainer: string;
   zecqr: string;
+  zZecqr: string,
   ethqr: string;
   tooltiptext: string;
   approxDate: string;
@@ -86,6 +87,7 @@ export const themedStyles: ThemedStyles<HomeStyleProps> = {
     tipBoxConainer: baseStyles.tipBoxContainer,
     qrContainer: baseStyles.qrContainer,
     zecqr: baseStyles.zecqr,
+    zZecqr: baseStyles.zZecqr,
     ethqr: baseStyles.ethqr,
     tooltiptext: baseStyles.tooltiptext,
     approxDate: baseStyles.daylightApproxDate,
@@ -125,6 +127,7 @@ export const themedStyles: ThemedStyles<HomeStyleProps> = {
     tipBoxConainer: baseStyles.tipBoxContainer,
     qrContainer: baseStyles.qrContainer,
     zecqr: baseStyles.zecqr,
+    zZecqr: baseStyles.zZecqr,
     ethqr: baseStyles.ethqr,
     tooltiptext: baseStyles.tooltiptext,
     approxDate: baseStyles.midnightApproxDate,
