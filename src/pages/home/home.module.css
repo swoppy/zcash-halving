@@ -87,6 +87,7 @@ h2 {
   display: flex;
   background-color: grayishBlackColor;
   justify-content: center;
+  align-items: center;
 }
 
 .countdownContainer {

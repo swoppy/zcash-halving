@@ -10,6 +10,7 @@ import text from './home_text';
 import data from './formula';
 import { Renderer, InfoBlocks, Faq, Stats, Footer, LeadSection } from './components/components';
 import { Helmet } from 'react-helmet';
+import metaImg from '../../assets/img/zcash_logo.png';
 
 type HomeStyleProps = {
   headerContainer: string;
@@ -192,9 +193,11 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
         <meta property='og:title' content={text.altTitle()}/>
         <meta property='og:url' content={text.siteUrl()}/>
         <meta property='og:description' content={text.metaDesc()}/>
+        <meta property="og:image" content={metaImg}/>
         <meta property='twitter:title' content={text.altTitle()}/>
         <meta property='twitter:url' content={text.siteUrl()}/>
         <meta property='twitter:description' content={text.metaDesc()}/>
+        <meta property="twitter:image" content={metaImg}/>
       </Helmet>
       <LeadSection/>
       <div className={styles.headerContainer}>
@@ -233,7 +236,6 @@ export const Home = observer(() => {
   const [store] = React.useState(
     new HomeStore(GlobalThemeStore.get() === Theme.MIDNIGHT)
   );
-
   return <BaseHome store={store}/>
 });
 

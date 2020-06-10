@@ -16,7 +16,7 @@ export default {
   q1: () => 'What is the Zcash Halving?',
   a1: () => `
     Zcash Halving is the event where the number of Zcash Block Reward Subsidy per block will be halved (divided by 2).
-    The total number of ZEC mined by miners per block will reduce from 12.5 ZEC to 6.25 ZEC in the next halving at block 1,046,400.
+    The total number of ZEC mined by miners per block will reduce from 6.25 ZEC to 3.125 ZEC in the next halving at block 1,046,400.
     Other than the decrease in Block Reward Subsidy, the next Zcash halving will also see the sunsetting on the Zcash Founder's Reward.`,
   q2: () => 'What is the Expected Date of the Zcash Halving?',
   a2: () => `
