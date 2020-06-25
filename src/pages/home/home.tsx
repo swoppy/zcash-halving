@@ -191,7 +191,6 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
       <Helmet>
         <title>{text.altTitle()}</title>
         <meta name='description' content={text.metaDesc()}/>
-        <meta property='og:title' content={text.altTitle()}/>
         <meta property='og:url' content={text.siteUrl()}/>
         <meta property='og:description' content={text.metaDesc()}/>
         <meta property="og:image" content={metaImg}/>
