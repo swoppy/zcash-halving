@@ -11,6 +11,7 @@ import data from './formula';
 import { Renderer, InfoBlocks, Faq, Stats, Footer, LeadSection } from './components/components';
 import { Helmet } from 'react-helmet';
 import metaImg from '../../assets/img/zcash_logo.png';
+import { fetchZchain, fetchCoinCap } from '../../services/figures_service';
 
 type HomeStyleProps = {
   headerContainer: string;
@@ -161,25 +162,25 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
   * use a constant mean block time of 75s before 1011800 (approx. 30 days before halving) but after it will be dynanmic
   */
   React.useEffect(() => {
-    fetch('https://api.zcha.in/v2/mainnet/network')
-      .then(response => response.json())
-      .then(data => setHalvingInfo({
-        currentBlock: data.blockNumber,
-        blockTime: data.blockNumber > 1011800 ? data.meanBlockTime : 75, // as per revsion
-        hashrate: data.hashrate,
-    }))
+    fetchZchain().then(response => {
+      setHalvingInfo({
+        currentBlock: response.blockNumber,
+        blockTime: response.blockNumber > 1011800 ? response.meanBlockTime : 75, // as per revsion
+        hashrate: response.hashrate,
+      })
+    })
   }, [halvingInfo.blockTime, halvingInfo.currentBlock, halvingInfo.hashrate]);
 
   // for Stats section
   React.useEffect(() => {
-    fetch('https://api.coincap.io/v2/assets/zcash')
-      .then(response => response.json())
-      .then(api => setEconomicInfo({
-        price: api.data.priceUsd,
-        totalSupply: api.data.maxSupply,
-        circulatingSupply: api.data.supply,
-        marketCap: api.data.marketCapUsd,
-      }))
+    fetchCoinCap().then(response => {
+      setEconomicInfo({
+        price: response.priceUsd,
+        totalSupply: response.maxSupply,
+        circulatingSupply: response.supply,
+        marketCap: response.marketCapUsd,
+      })
+    })
   }, [economicInfo.price, economicInfo.totalSupply, economicInfo.circulatingSupply, economicInfo.marketCap])
 
   const date = Date.now() + Math.trunc(halvingInfo.blockTime * (data.halvingBlock() - halvingInfo.currentBlock)) * 1000;
