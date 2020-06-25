@@ -13,7 +13,7 @@ const formatHashRate = (hashrate: number, decimals: number = 2) => {
   const dm = decimals < 0 ? 0 : decimals;
   const sizes = ['Hash', 'KH', 'MH', 'GH', 'TH', 'PH', 'EH', 'ZH', 'YH'];
   const i = Math.floor(Math.log(hashrate) / Math.log(h));
-  return parseFloat((hashrate / Math.pow(h, i)).toFixed(dm)) + ' ' + sizes[i];
+  return `${parseFloat((hashrate / Math.pow(h, i)).toFixed(dm))} ${sizes[i]}`;
 }
 
 export const LeadSection = () => {
@@ -201,7 +201,7 @@ const Widget = () => {
     });
     currentElm?.appendChild(script);
     return () => {
-      // removing first two elements, so it won't overlap when it's time to rerender, sort of like a cleanup
+      // removing first two elements, so it won't overlap when it's time to rerender
       currentElm?.firstElementChild?.remove();
       currentElm?.firstElementChild?.remove();
     };
@@ -220,6 +220,7 @@ type StatsProps = {
 
 export const Stats = ({ totalSupply, circulatingSupply, marketCap }: StatsProps) => {
   const styles = useStyles(themedStyles);
+  const percentMined = Math.trunc(circulatingSupply/totalSupply * 100) ? `${Math.trunc(circulatingSupply/totalSupply * 100)}%`: 0
   const statDetails: { label: string, figures: string | number }[] = [
     {
       label: text.zecMarketCap(),
@@ -235,7 +236,7 @@ export const Stats = ({ totalSupply, circulatingSupply, marketCap }: StatsProps)
     },
     {
       label: text.percentMined(),
-      figures: Math.trunc(circulatingSupply/totalSupply * 100) ? Math.trunc(circulatingSupply/totalSupply * 100) + '%' : 0,
+      figures: percentMined,
     },
   ]
   return (
