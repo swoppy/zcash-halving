@@ -10,7 +10,6 @@ import text from './home_text';
 import data from './formula';
 import { Renderer, InfoBlocks, Faq, Stats, Footer, LeadSection } from './components/components';
 import { Helmet } from 'react-helmet';
-import metaImg from '../../assets/img/zcash_logo.png';
 import { fetchZchain, fetchCoinCap } from '../../services/figures_service';
 
 type HomeStyleProps = {
@@ -193,11 +192,9 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
         <meta name='description' content={text.metaDesc()}/>
         <meta property='og:url' content={text.siteUrl()}/>
         <meta property='og:description' content={text.metaDesc()}/>
-        <meta property="og:image" content={metaImg}/>
         <meta property='twitter:title' content={text.altTitle()}/>
         <meta property='twitter:url' content={text.siteUrl()}/>
         <meta property='twitter:description' content={text.metaDesc()}/>
-        <meta property="twitter:image" content={metaImg}/>
       </Helmet>
       <LeadSection/>
       <div className={styles.headerContainer}>
