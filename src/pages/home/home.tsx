@@ -1,16 +1,28 @@
-import React from 'react';
-import { SwitchInput } from '../../components/input/switch_input';
-import { HomeStore } from './home_store';
-import Countdown from 'react-countdown';
-import { StandardPage } from '../../components/pager/standard_page/standard_page';
-import { GlobalThemeStore, Theme, ThemedStyles, useStyles} from '../../ui/themes';
-import { observer } from 'mobx-react';
-import baseStyles from './home.module.css';
-import text from './home_text';
-import data from './formula';
-import { Renderer, InfoBlocks, Faq, Stats, Footer, LeadSection } from './components/components';
-import { Helmet } from 'react-helmet';
-import { fetchZchain, fetchCoinCap } from '../../services/figures_service';
+import React from "react";
+import { SwitchInput } from "../../components/input/switch_input";
+import { HomeStore } from "./home_store";
+import Countdown from "react-countdown";
+import { StandardPage } from "../../components/pager/standard_page/standard_page";
+import {
+  GlobalThemeStore,
+  Theme,
+  ThemedStyles,
+  useStyles,
+} from "../../ui/themes";
+import { observer } from "mobx-react";
+import baseStyles from "./home.module.css";
+import text from "./home_text";
+import data from "./formula";
+import {
+  Renderer,
+  InfoBlocks,
+  Faq,
+  Stats,
+  Footer,
+  LeadSection,
+} from "./components/components";
+import { Helmet } from "react-helmet";
+import { fetchZchain, fetchCoinCap } from "../../services/figures_service";
 
 type HomeStyleProps = {
   headerContainer: string;
@@ -46,7 +58,7 @@ type HomeStyleProps = {
   tipBoxConainer: string;
   qrContainer: string;
   zecqr: string;
-  zZecqr: string,
+  zZecqr: string;
   ethqr: string;
   tooltiptext: string;
   approxDate: string;
@@ -158,58 +170,70 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
   });
 
   /*  for the countdown data
-  * use a constant mean block time of 75s before 1011800 (approx. 30 days before halving) but after it will be dynanmic
-  */
+   * use a constant mean block time of 75s before 1011800 (approx. 30 days before halving) but after it will be dynanmic
+   */
   React.useEffect(() => {
-    fetchZchain().then(response => {
+    fetchZchain().then((response) => {
       setHalvingInfo({
         currentBlock: response.blockNumber,
         blockTime: response.blockNumber > 1011800 ? response.meanBlockTime : 75, // as per revsion
         hashrate: response.hashrate,
-      })
-    })
+      });
+    });
   }, [halvingInfo.blockTime, halvingInfo.currentBlock, halvingInfo.hashrate]);
 
   // for Stats section
   React.useEffect(() => {
-    fetchCoinCap().then(response => {
+    fetchCoinCap().then((response) => {
       setEconomicInfo({
         price: response.priceUsd,
         totalSupply: response.maxSupply,
         circulatingSupply: response.supply,
         marketCap: response.marketCapUsd,
-      })
-    })
-  }, [economicInfo.price, economicInfo.totalSupply, economicInfo.circulatingSupply, economicInfo.marketCap])
+      });
+    });
+  }, [
+    economicInfo.price,
+    economicInfo.totalSupply,
+    economicInfo.circulatingSupply,
+    economicInfo.marketCap,
+  ]);
 
-  const date = Date.now() + Math.trunc(halvingInfo.blockTime * (data.halvingBlock() - halvingInfo.currentBlock)) * 1000;
-  const localDate = new Date(date).toUTCString();
-  const dateUTC = localDate.replace(/GMT/gi, 'UTC');
+  const date =
+    Date.now() +
+    Math.trunc(
+      halvingInfo.blockTime * (data.halvingBlock() - halvingInfo.currentBlock)
+    ) *
+      1000;
+  // Updated this part as the halving approaches, maybe several months before halving 2024
+  // const localDate = new Date(date).toUTCString();
+  // const dateUTC = localDate.replace(/GMT/gi, "UTC");
   return (
     <StandardPage>
       <Helmet>
         <title>{text.altTitle()}</title>
-        <meta name='description' content={text.metaDesc()}/>
-        <meta property='og:url' content={text.siteUrl()}/>
-        <meta property='og:description' content={text.metaDesc()}/>
-        <meta property='twitter:title' content={text.altTitle()}/>
-        <meta property='twitter:url' content={text.siteUrl()}/>
-        <meta property='twitter:description' content={text.metaDesc()}/>
+        <meta name="description" content={text.metaDesc()} />
+        <meta property="og:url" content={text.siteUrl()} />
+        <meta property="og:description" content={text.metaDesc()} />
+        <meta property="twitter:title" content={text.altTitle()} />
+        <meta property="twitter:url" content={text.siteUrl()} />
+        <meta property="twitter:description" content={text.metaDesc()} />
       </Helmet>
-      <LeadSection/>
+      <LeadSection />
       <div className={styles.headerContainer}>
         <div className={styles.themeContainer}>
-          <SwitchInput store={store.theme}/>
+          <SwitchInput store={store.theme} />
         </div>
         <div className={styles.title}>
           <h2>{text.headerTitle()}</h2>
         </div>
       </div>
       <div className={styles.halvingInfo}>
-        <div className={styles.screenshotView} id='countdownTimer'>
-          <div className={styles.approxDate}>{text.eta(dateUTC)}</div>
+        <div className={styles.screenshotView} id="countdownTimer">
+          {/* updated this part as the halving approaches, maybe several months before halving 2024 */}
+          {/* <div className={styles.approxDate}>{text.eta(dateUTC)}</div> */}
           <div className={styles.timerContainer}>
-            <Countdown date={date} renderer={Renderer}/>
+            <Countdown date={date} renderer={Renderer} />
           </div>
         </div>
         <InfoBlocks
@@ -218,13 +242,13 @@ const BaseHome = observer(({ store }: BaseHomeProps) => {
           hashrate={halvingInfo.hashrate}
         />
       </div>
-      <Faq/>
+      <Faq />
       <Stats
         marketCap={economicInfo.marketCap}
         totalSupply={economicInfo.totalSupply}
-        circulatingSupply={economicInfo.circulatingSupply}  
+        circulatingSupply={economicInfo.circulatingSupply}
       />
-      <Footer/>
+      <Footer />
     </StandardPage>
   );
 });
@@ -233,6 +257,5 @@ export const Home = observer(() => {
   const [store] = React.useState(
     new HomeStore(GlobalThemeStore.get() === Theme.MIDNIGHT)
   );
-  return <BaseHome store={store}/>
+  return <BaseHome store={store} />;
 });
-

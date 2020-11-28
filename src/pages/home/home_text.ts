@@ -1,5 +1,6 @@
 export default {
-  headerTitle: () => "Zcash Block Reward Halving",
+  headerTitle: () =>
+    "The November 2020 halving was already concluded, the next halving will be in 2024.",
   days: () => "days",
   hours: () => "hours",
   minutes: () => "minutes",
